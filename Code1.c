@@ -22,19 +22,3 @@ int main(int argc, char *argv[]) {
         fputs(buffer, fp);
     }
     fclose(fp);
-
-    /* Read from file */
-    fp = fopen(argv[1], "r");
-    if (fp == NULL) {
-        perror("Error opening file");
-        return 1;
-    }
-
-    printf("\nFile contents:\n");
-    while (fgets(buffer, sizeof(buffer), fp) != NULL) {
-        printf("%s", buffer);
-    }
-
-    fclose(fp);
-    return 0;
-}
