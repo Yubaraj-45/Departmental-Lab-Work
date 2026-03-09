@@ -1,0 +1,69 @@
+#include <unistd.h>
+#include <fcntl.h>
+#include <stdarg.h>
+#include <stdio.h>
+
+char mygetc(int fd)
+{
+    char c;
+    read(fd, &c, 1);
+    return c;
+}
+
+void myputc(int fd, char c)
+{
+    write(fd, &c, 1);
+}
+
+void myprintf(const char *format, ...)
+{
+    char buffer[1000];
+    va_list args;
+
+    va_start(args, format);
+    vsprintf(buffer, format, args);
+    va_end(args);
+
+    write(1, buffer, sizeof(buffer));
+}
+
+void myscanf(char *buffer, int size)
+{
+    read(0, buffer, size);
+}
+
+void myfprintf(int fd, const char *format, ...)
+{
+    char buffer[1000];
+    va_list args;
+
+    va_start(args, format);
+    vsprintf(buffer, format, args);
+    va_end(args);
+
+    write(fd, buffer, sizeof(buffer));
+}
+
+void myfscanf(int fd, char *buffer, int size)
+{
+    read(fd, buffer, size);
+}
+
+int main()
+{
+    int fd;
+    char name[50];
+
+    fd = open("data.txt", O_CREAT | O_RDWR, 0644);
+
+    myprintf("Enter your name: ");
+    myscanf(name, sizeof(name));
+
+    myfprintf(fd, "Name: %s\n", name);
+
+    myprintf("Data saved successfully\n");
+
+    close(fd);
+
+    return 0;
+}
