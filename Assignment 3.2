@@ -10,3 +10,14 @@ On little-endian systems (most common), it prints a large integer formed by comb
 On big-endian systems, the value will be different.
 Conclusion:
 The program produces undefined and system-dependent output, as it interprets a character array as an integer using pointer casting.
+
+
+#include <stdio.h>
+int main()
+{
+   char a[4]= "abcd";
+   int *p;
+   p=(int *) a;
+   printf("%d", *p);
+   return(0);
+}
