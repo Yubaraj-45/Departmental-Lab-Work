@@ -31,3 +31,53 @@ int main() {
 
     return 0;
 }
+
+
+#include <stdio.h>
+
+double add(double a, double b) {
+    return a + b;
+}
+
+double sub(double a, double b) {
+    return a - b;
+}
+
+double mul(double a, double b) {
+    return a * b;
+}
+
+double divide(double a, double b) {
+    return a / b;
+}
+
+double power(double a, double b) {
+    double result = 1;
+    for (int i = 0; i < (int)b; i++) {
+        result *= a;
+    }
+    return result;
+}
+
+int main() {
+    double a, b;
+    int choice;
+
+    // Array of function pointers
+    double (*operations[])(double, double) = {add, sub, mul, divide, power};
+
+    printf("Enter two numbers: ");
+    scanf("%lf %lf", &a, &b);
+
+    printf("Choose operation:\n");
+    printf("0: Add\n1: Subtract\n2: Multiply\n3: Divide\n4: Power\n");
+    scanf("%d", &choice);
+
+    if (choice >= 0 && choice <= 4) {
+        printf("Result = %.2lf\n", operations[choice](a, b));
+    } else {
+        printf("Invalid choice\n");
+    }
+
+    return 0;
+}
