@@ -1,1 +1,12 @@
-Assignment 3.2
+
+The string "abcd" requires 5 bytes ('a', 'b', 'c', 'd', '\0'), but the array size is 4, so no null terminator is stored. This results in undefined behavior.
+The array a contains the ASCII values:
+
+'a' = 97, 'b' = 98, 'c' = 99, 'd' = 100
+The pointer p is of type int* and is assigned the address of the character array. Thus, it treats the 4 bytes of the array as a single integer.
+When *p is printed, it reads all 4 bytes together and interprets them as an integer value.
+The actual output depends on the system architecture (endianness):
+On little-endian systems (most common), it prints a large integer formed by combining the ASCII values in reverse byte order.
+On big-endian systems, the value will be different.
+Conclusion:
+The program produces undefined and system-dependent output, as it interprets a character array as an integer using pointer casting.
