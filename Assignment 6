@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <stdarg.h>
+
+int findMax(int count, ...) {
+    va_list args;
+    int max, num;
+
+    va_start(args, count);
+    max = va_arg(args, int);
+
+    for(int i = 1; i < count; i++) {
+        num = va_arg(args, int);
+        if(num > max)
+            max = num;
+    }
+
+    va_end(args);
+    return max;
+}
+
+int main() {
+    int result = findMax(5, 10, 25, 7, 99, 3);
+    printf("Maximum value = %d\n", result);
+    return 0;
+}
