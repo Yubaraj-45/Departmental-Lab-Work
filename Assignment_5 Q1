@@ -1,0 +1,23 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    FILE *fp;
+    unsigned char byte;
+
+    fp = fopen("a.out", "rb");  // Open binary file
+
+    if (fp == NULL) {
+        printf("Error: Cannot open file.\n");
+        return 1;
+    }
+
+    printf("Reading binary file (a.out):\n");
+
+    while (fread(&byte, sizeof(byte), 1, fp) == 1) {
+        printf("%02X ", byte);  // Print in hex
+    }
+
+    fclose(fp);
+    return 0;
+}
